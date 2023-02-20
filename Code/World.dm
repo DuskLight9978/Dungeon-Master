@@ -63,7 +63,7 @@ var/PlayerList = list()
 			for(var/mob/X in Players2) if(X.client) for(var/obj/Hud/Day/D in X.client.screen)
 				D.icon_state = "Sun"
 				D.name = "Day"
-				D.text = "<font color=yellow>¤"
+				D.text = "<font color=yellow>ï¿½"
 			for(var/mob/Monsters/m in world)
 				if(m.SubRace == "Werewolf") m.WerewolfTransformation()
 				m.SunLight()
@@ -82,7 +82,7 @@ var/PlayerList = list()
 			for(var/mob/X in Players2) if(X.client) for(var/obj/Hud/Day/D in X.client.screen)
 				D.icon_state = "Moon"
 				D.name = "Night"
-				D.text = "<font color=blue>°"
+				D.text = "<font color=blue>ï¿½"
 			for(var/mob/Monsters/m in world)
 				if(m.SubRace == "Werewolf") m.WerewolfTransformation()
 obj/proc/CacoonTrap()
@@ -330,7 +330,7 @@ mob/proc/Intro() //**********************Remember to carry "CanBeCaged" or whate
 		body{background:background:white; color:black;}
 		</style>
 		<font size="10"> HELLO!
-		</font><i>It's me, Félix! read me...</i>
+		</font><i>It's me, Fï¿½lix! read me...</i>
 		<br>
 		If you're new, there's a small guide in the popup that shows up when you first log in. It's slightly out of date but will give you a small explination on the controls of the game.
 		<p>
@@ -590,8 +590,9 @@ world/proc/Aging() spawn() while(1)
 		if(m.Age<=5)
 			m.Age += 1
 			m.SpiderAgeGains()
-		if(m.Critter) if(m.Age>10) switch(m.Race) if("CaveSpider","DeathBeatle","Mole","TowerCap")
-			m.GoingToDie = 1
-			m.Killer = "time"
-			m.DeathType = "old age"
-			m.Death()
+		if(m.Critter) if(m.Age>10) switch(m.Race) 
+			if("CaveSpider","DeathBeatle","Mole","TowerCap")
+				m.GoingToDie = 1
+				m.Killer = "time"
+				m.DeathType = "old age"
+				m.Death()
