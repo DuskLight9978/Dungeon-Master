@@ -55,11 +55,15 @@ mob/proc/LoadUnits() if(fexists("units/[ckey]_save.sav"))
 		K.Fainted = 0
 		K.HomeLoc = null
 		K.Target = null
-		if(K.HasRightLeg == 1 && K.HasLeftLeg == 1) K.CanWalk = 1
-		if(K.Race=="Devourer") K.CanWalk = 1
+		if(K.HasRightLeg == 1 && K.HasLeftLeg == 1)
+			K.CanWalk = 1
+		if(K.Race=="Devourer")
+			K.CanWalk = 1
 		K.RebuildOverlays()
-		if(K.Race == "Vampire") if(K.y == 1 || K.y == 3) K.y = 2
-		var/image/I = new('mob.dmi',K)
+		if(K.Race == "Vampire")
+			if(K.y == 1 || K.y == 3)
+				K.y = 2
+		var/image/I = new('icons/mobs/mob.dmi',K)
 		K.Star = I
 		K.LimbLoss()
 	return(1)

@@ -8,7 +8,7 @@ mob/proc/ChangeOwnership(WHO,FORCE) //Sets to the owner to WHO, and if WHO is a 
 		if(ismob(WHO)) NEWOWNER=WHO//Same thing, but checks WHO instead of src's Owner.
 		if(OWNER) //Thus only triggering if src's Owner is a mob.
 			OWNER.UnitList -= src //Removes src from the old Owner's UnitList.
-			Deselect()
+			src.Deselect()
 		if(NEWOWNER) //Thus only triggering if WHO is a mob.
 			NEWOWNER.UnitList += src //If WHO is a mob, we'll be adding it to that mob's unit list with this.
 			CanBeSlaved=0 //We only want these set to 0 if the ownership if going to a mob.

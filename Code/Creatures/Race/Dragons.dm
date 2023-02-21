@@ -1,4 +1,4 @@
-mob/Monsters/Dragon
+/mob/Monsters/Dragon
 	icon = 'dragons.dmi'
 	icon_state = "black"
 	density = 1

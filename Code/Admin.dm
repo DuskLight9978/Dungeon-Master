@@ -28,50 +28,52 @@ For banning/unbanning to work, include this in your mob's Login() proc also.
 			del usr
 
 ===========================================================================================*/
-mob/var{Mcloaked=0;Mprevicon}
-var/moblist=list()
-var/adminlist=list()
-var/councillist=list()
-var/modlist=list()
-var/Players=list()
-var/Players2=list()
-mob
+/mob
+	var/Mcloaked=0
+	var/Mprevicon
+	var/moblist=list()
+	var/adminlist=list()
+	var/councillist=list()
+	var/modlist=list()
+	var/Players=list()
+	var/Players2=list()
 
-	Topic(href,href_list[])
-		switch(href_list["action"])
-			if("PM")//action, if its PM it goes on, if its not it just does nothing
-				if(usr.Muted)
-					usr<<"You are muted."
-					return
-				var/msg = input("What would you like to privately say to [src] ([src.name])?","Private Message") as text|null
-				if(!msg) return
-				//sends the message and tells the user the message they sent
-				if(usr.ckey in src.IgnoreList)
-					usr << "You are on [src]'s ignore list<br>"
-					return
-				usr<<"<font color=red>(PM)</font color><font color=blue><--- To: <a href=?src=\ref[src];action=PM>[src]</a>:</font color> [html_encode(msg)]"
-				src<<"<font color=red>(PM)</font color><font color=blue>---> From: <a href=?src=\ref[usr];action=PM>[usr]</a>:</font color> [html_encode(msg)]"
-				for(var/mob/D in Players2)
-					if(D.GM == 1 && D.DE == 1 && D != src && D != usr)
-						D<<"<b><font color=silver>[usr] sent to [src]:</font color> [msg]"
-			if("PPM")//action, if its PM it goes on, if its not it just does nothing
-				var/msg = input("What would you like to privately say to [src] ([src.name])?","Private Message") as text|null
-				if(!msg) return
-				//sends the message and tells the user the message they sent
-				if(usr.ckey in src.IgnoreList)
-					usr << "You are on [src]'s ignore list<br>"
-					return
-				usr<<"<font color=red>(PM)</font color><font color=blue><--- To: <a href=?src=\ref[src];action=PPM>[src]</a>:</font color> [html_encode(msg)]"
-				src<<"<font color=red>(PM)</font color><font color=blue>---> From: <a href=?src=\ref[usr];action=PPM>[usr]</a>:</font color> [html_encode(msg)]"
-				for(var/mob/D in Players2)
-					if(D.key == world.host)
-						D<<"<b><font color=silver>(Priv)[usr] sent to [src]:</font color> [msg]"
+/mob/Topic(href,href_list[])
+	switch(href_list["action"])
+		if("PM")//action, if its PM it goes on, if its not it just does nothing
+			if(usr.Muted)
+				usr<<"You are muted."
+				return
+			var/msg = input("What would you like to privately say to [src] ([src.name])?","Private Message") as text|null
+			if(!msg) return
+			//sends the message and tells the user the message they sent
+			if(usr.ckey in src.IgnoreList)
+				usr << "You are on [src]'s ignore list<br>"
+				return
+			usr<<"<font color=red>(PM)</font color><font color=blue><--- To: <a href=?src=\ref[src];action=PM>[src]</a>:</font color> [html_encode(msg)]"
+			src<<"<font color=red>(PM)</font color><font color=blue>---> From: <a href=?src=\ref[usr];action=PM>[usr]</a>:</font color> [html_encode(msg)]"
+			for(var/mob/D in Players2)
+				if(D.GM == 1 && D.DE == 1 && D != src && D != usr)
+					D<<"<b><font color=silver>[usr] sent to [src]:</font color> [msg]"
+		if("PPM")//action, if its PM it goes on, if its not it just does nothing
+			var/msg = input("What would you like to privately say to [src] ([src.name])?","Private Message") as text|null
+			if(!msg) return
+			//sends the message and tells the user the message they sent
+			if(usr.ckey in src.IgnoreList)
+				usr << "You are on [src]'s ignore list<br>"
+				return
+			usr<<"<font color=red>(PM)</font color><font color=blue><--- To: <a href=?src=\ref[src];action=PPM>[src]</a>:</font color> [html_encode(msg)]"
+			src<<"<font color=red>(PM)</font color><font color=blue>---> From: <a href=?src=\ref[usr];action=PPM>[usr]</a>:</font color> [html_encode(msg)]"
+			for(var/mob/D in Players2)
+				if(D.key == world.host)
+					D<<"<b><font color=silver>(Priv)[usr] sent to [src]:</font color> [msg]"
 
-mob
-	verb
-		Adminhelp(msg as text) if(msg) for(var/mob/M in world) if(M.GM || M == src) M << "<font color=blue>Admin-help from: <a href=?src=\ref[usr];action=PM>[usr]</a>([usr.Race]):</font color> [html_encode(msg)]"
+/mob/verb/Adminhelp(msg as text)
+	if(msg) for(var/mob/M in world)
+		if(M.GM || M == src)
+			M << "<font color=blue>Admin-help from: <a href=?src=\ref[usr];action=PM>[usr]</a>([usr.Race]):</font color> [html_encode(msg)]"
 
-mob/var/tmp/FreeSelect
+/mob/var/tmp/FreeSelect
 mob/var/tmp/LockDown=null
 Admin/verb/LockDownPlayer(Player/PLAY in world)
 	set category = "Admin"

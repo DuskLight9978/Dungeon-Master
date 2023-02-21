@@ -203,7 +203,7 @@ mob/proc/PetFollow()
 
 mob/proc/Ready()
 	src.Owner << "<b><font color=purple>[src]'s egg sack begins to swell she may now create a lair!"
-	src.icon = 'SpiderQueenMature.dmi'
+	src.icon = 'icons/mobs/SpiderQueenMature.dmi'
 	src.icon_state = "Normal"
 	src.MaxWebContent += 100
 	src.WebContent = src.MaxWebContent
@@ -217,7 +217,7 @@ mob/proc/Detail()
 		left.loc = locate(M.x-1,M.y,M.z)
 		for(var/turf/TUR in view(0,left))
 			if(TUR.icon_state == "CaveWall")
-				TUR.icon = 'Cave.dmi'
+				TUR.icon = 'icons/Cave.dmi'
 				TUR.icon_state = "StoneWall"
 				TUR.HP += 200
 				TUR.name = "DetailedWall"

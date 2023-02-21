@@ -66,19 +66,23 @@ mob/proc
 		ITEM.loc=loc
 		ITEM.suffix=null
 		weight-=ITEM.weight
-		if(istype(ITEM,/obj/Items/)) //Simply because I don't want to define stuff as atom vars and procs.
-			var/obj/Items/TRUE=ITEM
-			TRUE.ReEquipWhen=0
+		if(istype(ITEM,/obj/Items)) //Simply because I don't want to define stuff as atom vars and procs.
+			var/obj/Items/true=ITEM
+			true.ReEquipWhen=0
 		ITEM.DeleteItem()
 		if(ITEM.NoDropOnDeath)
 			del(ITEM)
 			return(1)
 		return(ITEM)
-	ToggleEquipItem(obj/Items/ITEM,MANUAL) switch(ITEM.suffix)
-		if("(Equipped)") return(UnEquipItem(ITEM,MANUAL))
-		if("(Carrying)") return(EquipItem(ITEM,MANUAL))
-		else return(0)
-	EquipItem(obj/Items/ITEM,MANUAL) if(UsesEquipment&&ITEM.loc==src&&ITEM.EquipmentType()&&ITEM.suffix=="(Carrying)")
+	ToggleEquipItem(/obj/Items/ITEM,MANUAL)
+		switch(ITEM.suffix)
+			if("(Equipped)")
+				return(UnEquipItem(ITEM,MANUAL))
+			if("(Carrying)")
+				return(EquipItem(ITEM,MANUAL))
+			else
+				return(0)
+	EquipItem(/obj/Items/ITEM,MANUAL) if(UsesEquipment&&ITEM.loc==src&&ITEM.EquipmentType()&&ITEM.suffix=="(Carrying)")
 		var/AllowedToEquip=1
 		if(AllowedToEquip) switch(ITEM.EquipmentType())
 			if("Weapon") if(HasRightArm&&CanUseRightArm)

@@ -8,9 +8,9 @@ mob/proc/RebuildOverlays()
 	overlays = list()
 	if(IsMist) return
 	if(!Critter) if(Gender=="Female") if(!Werepowers) switch(Race)
-		if("Human","Dwarf","Elf") overlays+=icon('Female.dmi',"Unders")
+		if("Human","Dwarf","Elf") overlays+=icon('icons/mobs/Female.dmi',"Unders")
 		if("Dragon","Spider")
-		else overlays+=icon('Female.dmi',"Shirt")
+		else overlays+=icon('icons/mobs/Female.dmi',"Shirt")
 	for(var/obj/Items/Equipment/Armour/Leggings/ITEM in src) if(ITEM.suffix=="(Equipped)") overlays+=icon(ITEM.icon,ITEM.icon_state)
 	for(var/obj/Items/Equipment/Armour/Chestplate/ITEM in src) if(ITEM.suffix=="(Equipped)") overlays+=icon(ITEM.icon,ITEM.icon_state)
 	if(Beard) overlays += icon('Beards.dmi',"[Beard]") //Under the helmet, over the chestplate.

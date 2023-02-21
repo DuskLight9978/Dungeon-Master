@@ -12,7 +12,7 @@ mob/proc/BowTarget()
 								for(var/obj/Items/Equipment/Armour/Quiver/LeatherQuiver/L in src)
 									if(L.suffix == "(Equipped)" && L.Content >= 1)
 										for(var/obj/Items/Arrows/A in L)
-											view() << 'Arrow.wav'
+											view() << 'Sounds/Arrow.wav'
 											A.suffix = null
 											A.Owner = src.Owner
 											A.Target = src.Target

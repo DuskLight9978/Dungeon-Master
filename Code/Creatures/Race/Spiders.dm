@@ -1,89 +1,93 @@
-atom/movable/var
+/atom/movable/var
 	WebContent = 0
 	MaxWebContent = 0
-mob/Monsters
-	Spider
-		UnArmedSkill = 1
-		ArmourSkill = 20
-		FishingSkill = 25
-		PoisonSkill = 55
-		ButcherySkill = 10
-		UnArmedSkill = 35
-		icon = 'SpiderWarriorYoung.dmi'
-		icon_state = "Normal"
-		Race = "Spider"
-		SubRace = "Warrior"
-		Gender = "Male"
-		HoldingWeapon = "Claws"
-		ImmunePoison = 1
-		Delay = 3
-		Age=1
-		HP = 220
-		MAXHP = 220
-		WoodCraftingSkill = 25
-		SneakingSkill = 60
-		weightmax = 100
-		density = 1
-		Carn = 1
-		BloodContent = 320
-		MaxBloodContent = 320
-		UsesEquipment=0
-		HasLeftEye = 1
-		HasRightEye = 1
-		HasRightLung  = 1
-		HasLeftLung  = 1
-		HasSpleen  = 1
-		HasTeeth  = 1
-		HasLeftArm  = 1
-		HasRightArm = 1
-		HasLeftLeg = 1
-		HasRightLeg = 1
-		HasHead = 1
-		HasLeftEar = 1
-		HasRightEar = 1
-		HasGuts = 1
-		HasStomach = 1
-		HasLeftKidney = 1
-		HasRightKidney = 1
-		HasLiver = 1
-		HasBrain = 1
-		HasHeart = 1
-		HasThroat = 1
-		HasNose = 1
-		OrganMaxHP = 85
-		CliffClimber=1
-		New()
-			usr.Strength = rand(15,20)
-			usr.Agility = rand(15,20)
-			usr.Defence = rand(25,35)
-			usr.DieAge = rand(1300,1500)
-			StartAllProcs()
-			..()
-			var/image/I = new('mob.dmi',src)
-			src.Star = I
-		Queen
-			icon = 'SpiderQueenYoung.dmi'
-			SubRace = "Queen"
-			Gender = "Female"
-			Age=20
-			SneakingSkill = 65
-			ArmourSkill = 25
-		Worker
-			icon = 'SpiderWorkerYoung.dmi'
-			SubRace = "Worker"
-			Gender = "Female"
-		Hunter
-			icon = 'SpiderHunterYoung.dmi'
-			SubRace = "Hunter"
-			Gender = "Male"
-			SneakingSkill = 90
-		Warrior
-			icon = 'SpiderWarriorYoung.dmi'
-			icon_state = "Normal"
-			Race = "Spider"
-			SubRace = "Warrior"
-			Gender = "Male"
-mob/proc/SpiderChooseEgg() //For manual egg creation. Eventually I want this to be replaced with direct HUD options.
+/mob/Monsters/Spider
+	UnArmedSkill = 1
+	ArmourSkill = 20
+	FishingSkill = 25
+	PoisonSkill = 55
+	ButcherySkill = 10
+	UnArmedSkill = 35
+	icon = 'SpiderWarriorYoung.dmi'
+	icon_state = "Normal"
+	Race = "Spider"
+	SubRace = "Warrior"
+	Gender = "Male"
+	HoldingWeapon = "Claws"
+	ImmunePoison = 1
+	Delay = 3
+	Age=1
+	HP = 220
+	MAXHP = 220
+	WoodCraftingSkill = 25
+	SneakingSkill = 60
+	weightmax = 100
+	density = 1
+	Carn = 1
+	BloodContent = 320
+	MaxBloodContent = 320
+	UsesEquipment=0
+	HasLeftEye = 1
+	HasRightEye = 1
+	HasRightLung  = 1
+	HasLeftLung  = 1
+	HasSpleen  = 1
+	HasTeeth  = 1
+	HasLeftArm  = 1
+	HasRightArm = 1
+	HasLeftLeg = 1
+	HasRightLeg = 1
+	HasHead = 1
+	HasLeftEar = 1
+	HasRightEar = 1
+	HasGuts = 1
+	HasStomach = 1
+	HasLeftKidney = 1
+	HasRightKidney = 1
+	HasLiver = 1
+	HasBrain = 1
+	HasHeart = 1
+	HasThroat = 1
+	HasNose = 1
+	OrganMaxHP = 85
+	CliffClimber=1
+
+/mob/Monsters/Spider/New()
+	usr.Strength = rand(15,20)
+	usr.Agility = rand(15,20)
+	usr.Defence = rand(25,35)
+	usr.DieAge = rand(1300,1500)
+	StartAllProcs()
+	..()
+	var/image/I = new('mob.dmi',src)
+	src.Star = I
+/mob/Monsters/Spider/Queen
+	icon = 'SpiderQueenYoung.dmi'
+	SubRace = "Queen"
+	Gender = "Female"
+	Age=20
+	SneakingSkill = 65
+	ArmourSkill = 25
+
+/mob/Monsters/Spider/Worker
+	icon = 'SpiderWorkerYoung.dmi'
+	SubRace = "Worker"
+	Gender = "Female"
+
+/mob/Monsters/Spider/Hunter
+	icon = 'SpiderHunterYoung.dmi'
+	SubRace = "Hunter"
+	Gender = "Male"
+	SneakingSkill = 90
+
+/mob/Monsters/Spider/Warrior
+	icon = 'SpiderWarriorYoung.dmi'
+	icon_state = "Normal"
+	Race = "Spider"
+	SubRace = "Warrior"
+	Gender = "Male"
+
+/mob/proc/SpiderChooseEgg() //For manual egg creation. Eventually I want this to be replaced with direct HUD options.
 	if(Age<24)
 		Owner << "[src] needs to be at least 24 before she can lay eggs."
 		return
@@ -108,14 +112,14 @@ mob/proc/SpiderChooseEgg() //For manual egg creation. Eventually I want this to 
 			WebContent-=50
 			SpiderLayEgg(EGGTYPE)
 	else Owner << "[src] needs at least 50 web content to lay an egg."
-mob/proc/SpiderLayEgg(TYPE) //Just look at 'Breeding.dm' for info on what exactly happens.
+/mob/proc/SpiderLayEgg(TYPE) //Just look at 'Breeding.dm' for info on what exactly happens.
 	var/mob/Monsters/Egg/E = new(loc)
 	E.icon_state="Spider"
 	E.ChangeOwnership(Owner)
 	E.Breeding(src,src,1800) //Breeding Spawns, giving us a chance to change a few details on the child's result.
 	E.CHILDTYPE = text2path("/mob/Monsters/Spider/[TYPE]")
 	return(1)
-mob/proc/SpiderAgeGains() if(Race=="Spider") //From Scratch! :D Outside of maybe the messages.
+/mob/proc/SpiderAgeGains() if(Race=="Spider") //From Scratch! :D Outside of maybe the messages.
 	var
 		POISON_UP
 		SILK_UP

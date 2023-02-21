@@ -74,28 +74,36 @@ mob/proc/MakeBody(LOC)
 		Flying=0
 		switch(Race)
 			if("Vampire")
-				icon = 'Vampire.dmi'
+				icon = 'icons/mobs/Vampire.dmi'
 				LimbLoss()
 				icon = turn(icon,90)
 			if("Demon")
-				icon = 'Demon.dmi'
+				icon = 'icons/mobs/Demon.dmi'
 				LimbLoss()
 				icon = turn(icon,90)
 			if("Gargoyle")
-				icon = 'Gargoyle.dmi'
+				icon = 'icons/mobs/Gargoyle.dmi'
 				LimbLoss()
 				icon = turn(icon,90)
-	var/icon/ICON = new('Hair.dmi',"") //This has a blank 32x32 icon with a movement state.
+	var/icon/ICON = new('icons/mobs/accessories/Hair.dmi',"") //This has a blank 32x32 icon with a movement state.
 	ICON.Blend(icon(icon,icon_state),ICON_OVERLAY)
-	if(!Critter) if(Gender=="Female") if(!Werepowers) switch(Race)
-		if("Human","Dwarf","Elf")
-			ICON.Blend(icon('Female.dmi',"Unders",SOUTH,1,1),ICON_OVERLAY)
-			if(Black) ICON.Blend(icon('Female.dmi',"BlackHair"),ICON_OVERLAY)
-			else ICON.Blend(icon('Female.dmi',"Hair"),ICON_OVERLAY)
-		if("Dragon","Spider")
-		else ICON.Blend(icon('Female.dmi',"Shirt"),ICON_OVERLAY)
-	if(Beard) ICON.Blend(icon('Beards.dmi',Beard),ICON_OVERLAY)
-	if(Hair) ICON.Blend(icon('Hair.dmi',Hair),ICON_OVERLAY)
+	if(!Critter)
+		if(Gender=="Female")
+			if(!Werepowers)
+				switch(Race)
+					if("Human","Dwarf","Elf")
+						ICON.Blend(icon('icons/mobs/Female.dmi',"Unders",SOUTH,1,1),ICON_OVERLAY)
+						if(Black)
+							ICON.Blend(icon('icons/mobs/accessories/Hair.dmi',"HumanBlack"),ICON_OVERLAY)
+						else
+							ICON.Blend(icon('icons/mobs/Female.dmi',"Hair"),ICON_OVERLAY)
+					if("Dragon","Spider")
+					else
+						ICON.Blend(icon('icons/mobs/Female.dmi', "Shirt"),ICON_OVERLAY)
+	if(Beard)
+		ICON.Blend(icon('icons/mobs/accessories/Beards.dmi', Beard),ICON_OVERLAY)
+	if(Hair)
+		ICON.Blend(icon('icons/mobs/accessories/Hair.dmi', Hair),ICON_OVERLAY)
 	var/mob/Body/B = new(LOC)
 	B.icon = ICON
 	B.icon_state = icon_state
@@ -104,12 +112,14 @@ mob/proc/MakeBody(LOC)
 	B.Owner = "[Owner]"
 	B.name = "[src]'s Body"
 	if(OnFire&&HumanParts)
-		B.icon = 'DamagedParts.dmi'
+		B.icon = 'icons/DamagedParts.dmi'
 		B.Skinned = 1
 	B.Critter=Critter
-	if(Race == "CaveSpider") B.weight = 10
-	if(Race == "Plant") B.icon_state = "Dead[SubRace]"
-mob/proc/TearSkin(mob/Body/BODY,Telling=0) if(BODY.loc==src)
+	if(Race == "CaveSpider")
+		B.weight = 10
+	if(Race == "Plant")
+		B.icon_state = "Dead[SubRace]"
+/mob/proc/TearSkin(mob/Body/BODY,Telling=0) if(BODY.loc==src)
 	if(!BODY.Skinned)
 		BODY.Skinned=1
 		var/obj/Items/SKIN

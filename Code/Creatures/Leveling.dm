@@ -1,14 +1,18 @@
-atom/var
-	Strength
-	Agility
-	Defence
+/atom
+	var/Strength
+	var/Agility
+	var/Defence
 
-var/ExperienceMultiplier=1
-mob/proc/GainEXP(XP)
-	if(CanBeSlaved) EXP+=(XP*ExperienceMultiplier)/2
-	else EXP+=XP*ExperienceMultiplier
+	var/ExperienceMultiplier=1
+
+/mob/proc/GainEXP(XP)
+	if(CanBeSlaved)
+		EXP += (XP*ExperienceMultiplier)/2
+	else
+		EXP += XP*ExperienceMultiplier
 	LevelUp()
-mob/proc/LevelUp()
+
+/mob/proc/LevelUp()
 	if(Level >= 100) return
 	while(EXP >= EXPNeeded)
 		if(Level >= 100) break
@@ -18,13 +22,21 @@ mob/proc/LevelUp()
 		Level += 1
 		Owner << "[src] has reached level [Level]!"
 		switch(Race)
-			if("Dwarf","Demon","Gargoyle","Frogman","Dragon") OrganMaxHP+=2.25
-			if("Frogman","Vampire","Lizardman","Demon","Orc","Dwarf","Gargoyle","Svartalfar") OrganMaxHP+=2
-			if("Human","Goblin","Illithid","Elf","Kobold","Zombie") OrganMaxHP+=1.75
-			if("Ratman") OrganMaxHP += 1.5
-			if("Spider") OrganMaxHP += 1
-			else OrganMaxHP += rand(0.75,1)
-		if(OrganMaxHP > 300) OrganMaxHP = 300
+			if("Dwarf","Demon","Gargoyle","Frogman","Dragon")
+				OrganMaxHP+=2.25
+			if("Frogman","Vampire","Lizardman","Demon","Orc","Dwarf","Gargoyle","Svartalfar")
+				OrganMaxHP+=2
+			if("Human","Goblin","Illithid","Elf","Kobold","Zombie")
+				OrganMaxHP+=1.75
+			if("Ratman")
+				OrganMaxHP += 1.5
+			if("Spider")
+				OrganMaxHP += 1
+			else
+				OrganMaxHP += rand(0.75,1)
+		if(OrganMaxHP > 300)
+			OrganMaxHP = 300
+			
 		var/STR=pick(1,1.25)
 		var/AGL=pick(1,1.25)
 		var/INT=pick(0.01,0.02)
@@ -109,29 +121,30 @@ mob/proc/LevelUp()
 				DEF+=1
 				MIN+=0.5
 				MAX+=0.5
-			if("Spider") switch(SubRace)
-				if("Queen")
-					POI+=1
-					STR+=1.5
-					AGL+=1.5
-					WEB+=20
-					MIN+=0.5
-					MAX+=0.75
-				if("Warrior")
-					STR+=1.25
-					AGL+=1
-					MIN+=0.25
-					MAX+=0.5
-				if("Worker")
-					STR+=0.75
-					AGL+=0.75
-					WEI+=30
-					WEB+=5
-				if("Hunter")
-					STR+=0.25
-					AGL+=1
-					WEB+=1
-					POI+=0.75
+			if("Spider")
+				switch(SubRace)
+					if("Queen")
+						POI+=1
+						STR+=1.5
+						AGL+=1.5
+						WEB+=20
+						MIN+=0.5
+						MAX+=0.75
+					if("Warrior")
+						STR+=1.25
+						AGL+=1
+						MIN+=0.25
+						MAX+=0.5
+					if("Worker")
+						STR+=0.75
+						AGL+=0.75
+						WEI+=30
+						WEB+=5
+					if("Hunter")
+						STR+=0.25
+						AGL+=1
+						WEB+=1
+						POI+=0.75
 			if("Vampire")
 				STR+=1.5
 				AGL+=1.5
@@ -154,8 +167,10 @@ mob/proc/LevelUp()
 
 		Defence+=DEF
 
-		if(Flying||IsMist) Old+=WEI
-		else weightmax+=WEI
+		if(Flying||IsMist)
+			Old+=WEI
+		else
+			weightmax+=WEI
 
 		PoisonDMG+=POI
 		WebContent+=WEB
@@ -165,33 +180,36 @@ mob/proc/LevelUp()
 		WeaponDamageMax+=MAX
 		var/MaxStrength=120
 		var/MaxAgility=120
-	switch(Race)
-		if("Kobold","Ratman") MaxAgility+=10
-		if("Dwarf")
-			MaxStrength+=10
-			MaxAgility-=10
-		if("Vampire")
+		switch(Race)
+			if("Kobold","Ratman")
+				MaxAgility+=10
+			if("Dwarf")
+				MaxStrength+=10
+				MaxAgility-=10
+			if("Vampire")
+				MaxStrength+=10
+				MaxAgility+=10
+		switch(SubRace)
+			if("Werewolf")
+				MaxStrength+=10
+				MaxAgility+=10
+			//Spiders
+			if("Warrior")
+				MaxStrength+=10
+				MaxAgility-=10
+			if("Worker")
+				MaxStrength -= 20
+				MaxAgility -= 20
+			if("Hunter")
+				MaxStrength -= 45
+				MaxAgility += 20
+		if(IsRoyal)
 			MaxStrength+=10
 			MaxAgility+=10
-	switch(SubRace)
-		if("Werewolf")
-			MaxStrength+=10
-			MaxAgility+=10
-		//Spiders
-		if("Warrior")
-			MaxStrength+=10
-			MaxAgility-=10
-		if("Worker")
-			MaxStrength-=20
-			MaxAgility-=20
-		if("Hunter")
-			MaxStrength-=45
-			MaxAgility+=20
-	if(IsRoyal)
-		MaxStrength+=10
-		MaxAgility+=10
-	if(Werepowers)
-		MaxStrength+=20
-		MaxAgility+=20
-	if(Strength>MaxStrength) Strength=MaxStrength
-	if(Agility>MaxAgility) Agility=MaxAgility
+		if(Werepowers)
+			MaxStrength += 20
+			MaxAgility += 20
+		if(Strength > MaxStrength)
+			Strength = MaxStrength
+		if(Agility > MaxAgility)
+			Agility = MaxAgility

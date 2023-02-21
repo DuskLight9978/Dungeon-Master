@@ -918,7 +918,7 @@ mob
 						usr.Text(usr,7,5,4,10,"SilkBridge")
 						Dec.screen_loc = "11,13"
 						usr.Text(usr,12,13,4,10,"Decorations")
-						if(M.icon == 'SpiderQueenMature.dmi')
+						if(M.icon == 'icons/mobs/SpiderQueenMature.dmi')
 							Lair.screen_loc = "11,11"
 							usr.Text(usr,13,11,4,10,"Lair")
 						Dest.screen_loc = "11,9"
@@ -1447,18 +1447,18 @@ mob/proc/FightSound()
 		if(src.HoldingWeapon)
 			var/S = rand(1,3)
 			if(S == 1)
-				view() << '1.wav'
+				view() << 'Sounds/1.wav'
 			if(S == 2)
-				view() << '2.wav'
+				view() << 'Sounds/2.wav'
 			if(S == 3)
-				view() << '3.wav'
+				view() << 'Sounds/3.wav'
 mob/proc/FightSound2()
 	spawn(5)
 		if(!HoldingWeapon)
 			var/S = rand(1,3)
 			if(S == 1)
-				view() << 'P1.wav'
+				view() << 'Sounds/P1.wav'
 			if(S == 2)
-				view() << 'P2.wav'
+				view() << 'Sounds/P2.wav'
 			if(S == 3)
-				view() << 'P3.wav'
+				view() << 'Sounds/P3.wav'
